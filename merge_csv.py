@@ -22,29 +22,34 @@ import glob
 import csv
 from xlsxwriter.workbook import Workbook
 
-# The link to the new Xlsx file and csv directory
-wb_path ='./Kevinzekyongare.xlsx' # REPLACE
+def main():
+    # The link to the new Xlsx file and csv directory
+    wb_path ='./Kevinzekyongare.xlsx' # REPLACE
 
-# The link to the new Xlsx file and csv directory
-csv_dir _path ='./Kevinzekyongare' # REPLACE
+    # The link to the new Xlsx file and csv directory
+    csv_dir _path ='./Kevinzekyongare' # REPLACE
 
-workbook = Workbook(wb_path)
+    workbook = Workbook(wb_path)
 
-#
-for csvfile in glob.glob(os.path.join(csv_dir_path, '*.csv')):
-    print os.path.basename(csvfile)
-    worksheet = workbook.add_worksheet(os.path.splitext(os.path.basename(csvfile))[0]) #worksheet name equals csv file name
-    with open(csvfile, 'rb') as f:
-        print "current csv: " ,
-        print csvfile
-        reader = csv.reader(f)
-        for r, row in enumerate(reader):
-            print "row: {} columns".format(r)
-            for c, col in enumerate(row):
-                print "col: {}".format(c),
-                print col,
-                worksheet.write(r, c, col) #write the csv file content into it
-            print
-    print
-    print "##################################"
-workbook.close()
+    #
+    for csvfile in glob.glob(os.path.join(csv_dir_path, '*.csv')):
+        print os.path.basename(csvfile)
+        worksheet = workbook.add_worksheet(os.path.splitext(os.path.basename(csvfile))[0]) #worksheet name equals csv file name
+        with open(csvfile, 'rb') as f:
+            print "current csv: " ,
+            print csvfile
+            reader = csv.reader(f)
+            for r, row in enumerate(reader):
+                print "row: {} columns".format(r)
+                for c, col in enumerate(row):
+                    print "col: {}".format(c),
+                    print col,
+                    worksheet.write(r, c, col) #write the csv file content into it
+                print
+        print
+        print "##################################"
+    workbook.close()
+
+if __name__ == "__main__":
+    main()
+
